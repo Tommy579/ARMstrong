@@ -1,0 +1,23 @@
+
+#    inputs   | outputs 
+  e3 e2 e1 e0 |	 out
+   0  0  0  0 |	 AND
+   0  0  0  1 |  EOR
+   0  0  1  0 |  LSL
+   0  0  1  1 |  LSR
+
+   0  1  0  0 |  ASR
+   0  1  0  1 |  ADC
+   0  1  1  0 |  SBC
+   0  1  1  1 |  ROR
+   
+   1  0  0  0 |  TST
+   1  0  0  1 |  RSB
+   1  0  1  0 |  CMP
+   1  0  1  1 |  CMN
+
+   1  1  0  0 |  ORR
+   1  1  0  1 |  MUL
+   1  1  1  0 |  BIC
+   1  1  1  1 |  MVN
+
