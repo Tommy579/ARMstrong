@@ -1,0 +1,377 @@
+# ------- LSLS -------
+elif mnemonic == 'LSLS':
+	rd = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	imm5 = parse_immediate(parts[3])
+	opcode = 0b0 
+
+	machine_code = (opcode << x) | (imm5 << x) | (rm << x) | rd
+
+
+# ------- LSRS -------
+elif mnemonic == 'LSRS':
+	rd = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	imm5 = parse_immediate(parts[3])
+	opcode = 0b1 
+
+	machine_code = (opcode << x) | (imm5 << x) | (rm << x) | rd
+
+
+# ------- ASRS -------
+elif mnemonic == 'ASRS':
+	rd = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	imm5 = parse_immediate(parts[3])
+	opcode = 0b10 
+
+	machine_code = (opcode << x) | (imm5 << x) | (rm << x) | rd
+
+
+# ------- ADDS -------
+elif mnemonic == 'ADDS':
+	rd = parse_register(parts[1])
+	rn = parse_register(parts[2])
+	rm = parse_register(parts[3])
+	opcode = 0b1100 
+
+	machine_code = (opcode << x) | (rm << x) | (rn << x) | rd
+
+
+# ------- SUBS -------
+elif mnemonic == 'SUBS':
+	rd = parse_register(parts[1])
+	rn = parse_register(parts[2])
+	rm = parse_register(parts[3])
+	opcode = 0b1101 
+
+	machine_code = (opcode << x) | (rm << x) | (rn << x) | rd
+
+
+# ------- ADDS -------
+elif mnemonic == 'ADDS':
+	rd = parse_register(parts[1])
+	rn = parse_register(parts[2])
+	imm3 = parse_immediate(parts[3])
+	opcode = 0b1110 
+
+	machine_code = (opcode << x) | (imm3 << x) | (rn << x) | rd
+
+
+# ------- SUBS -------
+elif mnemonic == 'SUBS':
+	rd = parse_register(parts[1])
+	rn = parse_register(parts[2])
+	imm3 = parse_immediate(parts[3])
+	opcode = 0b1111 
+
+	machine_code = (opcode << x) | (imm3 << x) | (rn << x) | rd
+
+
+# ------- MOVS -------
+elif mnemonic == 'MOVS':
+	imm8 = parse_immediate(parts[1])
+	rd = parse_register(parts[2])
+	opcode = 0b100 
+
+	machine_code = (opcode << x) | (rd << x) | imm8
+
+
+# ------- ANDS -------
+elif mnemonic == 'ANDS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100000000 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- EORS -------
+elif mnemonic == 'EORS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100000001 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- LSLS -------
+elif mnemonic == 'LSLS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100000010 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- LSRS -------
+elif mnemonic == 'LSRS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100000011 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- ASRS -------
+elif mnemonic == 'ASRS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100000100 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- ADCS -------
+elif mnemonic == 'ADCS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100000101 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- SBCS -------
+elif mnemonic == 'SBCS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100000110 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- RORS -------
+elif mnemonic == 'RORS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100000111 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- TST -------
+elif mnemonic == 'TST':
+	rn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100001000 
+
+	machine_code = (opcode << x) | (rm << x) | rn
+
+
+# ------- RSBS -------
+elif mnemonic == 'RSBS':
+	rdn = parse_register(parts[1])
+	rn = parse_register(parts[2])
+	opcode = 0b100001001 
+
+	machine_code = (opcode << x) | (rn << x) | rdn
+
+
+# ------- CMP -------
+elif mnemonic == 'CMP':
+	rn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100001010 
+
+	machine_code = (opcode << x) | (rm << x) | rn
+
+
+# ------- CMN -------
+elif mnemonic == 'CMN':
+	rn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100001011 
+
+	machine_code = (opcode << x) | (rm << x) | rn
+
+
+# ------- ORRS -------
+elif mnemonic == 'ORRS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100001100 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- MULS -------
+elif mnemonic == 'MULS':
+	rdm = parse_register(parts[1])
+	rn = parse_register(parts[2])
+	opcode = 0b100001101 
+
+	machine_code = (opcode << x) | (rn << x) | rdm
+
+
+# ------- BICS -------
+elif mnemonic == 'BICS':
+	rdn = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100001110 
+
+	machine_code = (opcode << x) | (rm << x) | rdn
+
+
+# ------- MVNS -------
+elif mnemonic == 'MVNS':
+	rd = parse_register(parts[1])
+	rm = parse_register(parts[2])
+	opcode = 0b100001111 
+
+	machine_code = (opcode << x) | (rm << x) | rd
+
+
+# ------- STR -------
+elif mnemonic == 'STR':
+	imm8 = parse_immediate(parts[1])
+	rt = parse_register(parts[2])
+	opcode = 0b10010 
+
+	machine_code = (opcode << x) | (rt << x) | imm8
+
+
+# ------- LDR -------
+elif mnemonic == 'LDR':
+	imm8 = parse_immediate(parts[1])
+	rt = parse_register(parts[2])
+	opcode = 0b10011 
+
+	machine_code = (opcode << x) | (rt << x) | imm8
+
+
+# ------- ADD -------
+elif mnemonic == 'ADD':
+	imm7 = parse_immediate(parts[1])
+	opcode = 0b101100000 
+
+	machine_code = (opcode << x) | imm7
+
+
+# ------- SUB -------
+elif mnemonic == 'SUB':
+	imm7 = parse_immediate(parts[1])
+	opcode = 0b101100001 
+
+	machine_code = (opcode << x) | imm7
+
+
+# ------- BEQ -------
+elif mnemonic == 'BEQ':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11010000 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BNE -------
+elif mnemonic == 'BNE':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11010001 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BCS -------
+elif mnemonic == 'BCS':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11010010 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BCC -------
+elif mnemonic == 'BCC':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11010011 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BMI -------
+elif mnemonic == 'BMI':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11010100 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BPL -------
+elif mnemonic == 'BPL':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11010101 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BVS -------
+elif mnemonic == 'BVS':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11010110 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BVC -------
+elif mnemonic == 'BVC':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11010111 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BHI -------
+elif mnemonic == 'BHI':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11011000 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BLS -------
+elif mnemonic == 'BLS':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11011001 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BGE -------
+elif mnemonic == 'BGE':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11011010 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BLT -------
+elif mnemonic == 'BLT':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11011011 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BGT -------
+elif mnemonic == 'BGT':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11011100 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- BLE -------
+elif mnemonic == 'BLE':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11011101 
+
+	machine_code = (opcode << x) | imm8
+
+
+# ------- B or BAL -------
+elif mnemonic == 'B or BAL':
+	imm8 = parse_immediate(parts[1])
+	opcode = 0b11011110 
+
+	machine_code = (opcode << x) | imm8
+
+
