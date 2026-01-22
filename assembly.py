@@ -418,33 +418,33 @@ def assemble_line(line):
     return f"{machine_code:04x}"
 
 
-# --- Programme principal ---
-source_code = """
-MOVS R0, #5       ; Charge 5 dans R0
-MOVS R1, #3       ; Charge 3 dans R1
-ADDS R2, R0, R1   ; R2 = R0 + R1
-LSLS R3, R0, #1   ; R3 = R0 << 1
-"""
+# ------ File reader and writer -------
+def convert_to_string(L):
+    string_result = ""
+    for element in L:
+        string_result += element +" "
+    return string_result
 
-source_code = """
-; Programme de test complet pour le processeur PARM
-; Teste: Arithmétique, Décalages, Mémoire, Comparaisons, Branchements
+def convert_assembly_file(file_path):
+    result = []
+    with open(file_path, "r") as f:
+        for line in f.readlines():
+            hex_code = assemble_line(line)
+            if hex_code:
+                result.append(hex_code)
+    result = convert_to_string(result)
+    return result
 
-MOVS R0, #5       ; Charge 5 dans R0
-MOVS R1, #3       ; Charge 3 dans R1
-ADDS R2, R0, R1   ; R2 = R0 + R1 = 8
-LSLS R3, R2, #1   ; R3 = R2 << 1 = 16
-SUBS R3, R3, #1   ; R3 = R3 - 1 = 15
-STR R3, [SP, #4]  ; Stocke 15 à l'adresse SP+4
-LDR R4, [SP, #4]  ; Recharge 15 dans R4 depuis la mémoire
-CMP R3, R4        ; Compare R3 (15) et R4 (15) -> Flag Z=1
-BEQ -7            ; Si Egal (Z=1), saute en arrière vers SUBS (Boucle infinie)
-"""
+def write_to_file(file_path):
+    with open(file_path, "w") as fw:
+        fw.write("v2.0 raw\n" + result)
 
-print("v2.0 raw")  # En-tête obligatoire pour Logisim
-for line in source_code.strip().split('\n'):
-    hex_code = assemble_line(line)
-    if hex_code:
-        print(hex_code, end=" ")
+
+# ------- To change -------
+result = convert_assembly_file("assembly_test.txt")
+print("v2.0 raw")
+print(result)
+write_to_file("test.txt")
+
 
 # Résultat : 2005 2103 1842 0053 1e5b 9301 9c01 42a3 d0f9
