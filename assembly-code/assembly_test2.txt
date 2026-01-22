@@ -1,0 +1,4 @@
+MOVS R0, #5       ; Charge 5 dans R0
+MOVS R1, #3       ; Charge 3 dans R1
+ADDS R2, R0, R1   ; R2 = R0 + R1
+LSLS R3, R0, #1   ; R3 = R0 << 1
