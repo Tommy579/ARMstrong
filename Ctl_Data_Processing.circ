@@ -160,8 +160,8 @@ end type_architecture;
       <circ-port dir="out" pin="630,150" x="270" y="100"/>
       <circ-port dir="out" pin="630,210" x="270" y="80"/>
       <circ-port dir="out" pin="630,270" x="270" y="60"/>
+      <circ-port dir="out" pin="630,370" x="270" y="140"/>
       <circ-port dir="out" pin="630,90" x="270" y="120"/>
-      <circ-port dir="out" pin="660,370" x="270" y="140"/>
     </appear>
     <comp lib="0" loc="(160,300)" name="Power"/>
     <comp lib="0" loc="(190,300)" name="Ground">
@@ -172,7 +172,7 @@ end type_architecture;
       <a name="label" val="Instruction"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="0" loc="(230,170)" name="Splitter">
+    <comp lib="0" loc="(230,220)" name="Splitter">
       <a name="bit0" val="none"/>
       <a name="bit1" val="none"/>
       <a name="bit10" val="none"/>
@@ -192,7 +192,7 @@ end type_architecture;
       <a name="fanout" val="1"/>
       <a name="incoming" val="16"/>
     </comp>
-    <comp lib="0" loc="(230,250)" name="Splitter">
+    <comp lib="0" loc="(230,260)" name="Splitter">
       <a name="appear" val="right"/>
       <a name="bit0" val="none"/>
       <a name="bit1" val="none"/>
@@ -233,13 +233,7 @@ end type_architecture;
       <a name="fanout" val="1"/>
       <a name="incoming" val="16"/>
     </comp>
-    <comp lib="0" loc="(270,200)" name="Splitter">
-      <a name="bit2" val="none"/>
-      <a name="bit3" val="2"/>
-      <a name="fanout" val="3"/>
-      <a name="incoming" val="4"/>
-    </comp>
-    <comp lib="0" loc="(290,350)" name="Splitter">
+    <comp lib="0" loc="(360,340)" name="Splitter">
       <a name="appear" val="right"/>
       <a name="bit0" val="none"/>
       <a name="bit1" val="none"/>
@@ -270,13 +264,13 @@ end type_architecture;
     <comp lib="0" loc="(590,210)" name="Pull Resistor">
       <a name="facing" val="north"/>
     </comp>
-    <comp lib="0" loc="(600,90)" name="Pull Resistor">
+    <comp lib="0" loc="(590,270)" name="Pull Resistor">
       <a name="facing" val="north"/>
     </comp>
-    <comp lib="0" loc="(610,270)" name="Pull Resistor">
+    <comp lib="0" loc="(590,370)" name="Pull Resistor">
       <a name="facing" val="north"/>
     </comp>
-    <comp lib="0" loc="(620,370)" name="Pull Resistor">
+    <comp lib="0" loc="(590,90)" name="Pull Resistor">
       <a name="facing" val="north"/>
     </comp>
     <comp lib="0" loc="(630,150)" name="Pin">
@@ -300,27 +294,19 @@ end type_architecture;
       <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
-    <comp lib="0" loc="(630,90)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Rd"/>
-      <a name="type" val="output"/>
-      <a name="width" val="3"/>
-    </comp>
-    <comp lib="0" loc="(660,370)" name="Pin">
+    <comp lib="0" loc="(630,370)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="Flags_Update_Mask"/>
       <a name="type" val="output"/>
       <a name="width" val="4"/>
     </comp>
-    <comp lib="1" loc="(340,180)" name="AND Gate">
-      <a name="inputs" val="3"/>
-      <a name="negate1" val="true"/>
-      <a name="size" val="30"/>
-    </comp>
-    <comp lib="1" loc="(360,350)" name="AND Gate">
-      <a name="size" val="30"/>
+    <comp lib="0" loc="(630,90)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="Rd"/>
+      <a name="type" val="output"/>
+      <a name="width" val="3"/>
     </comp>
     <comp lib="1" loc="(400,350)" name="NOT Gate">
       <a name="size" val="20"/>
@@ -331,25 +317,18 @@ end type_architecture;
     <comp lib="1" loc="(500,210)" name="Controlled Buffer">
       <a name="width" val="3"/>
     </comp>
-    <comp lib="1" loc="(510,270)" name="Controlled Buffer">
+    <comp lib="1" loc="(500,270)" name="Controlled Buffer">
       <a name="width" val="4"/>
     </comp>
-    <comp lib="1" loc="(520,370)" name="Controlled Buffer">
+    <comp lib="1" loc="(500,370)" name="Controlled Buffer">
       <a name="width" val="4"/>
     </comp>
-    <comp lib="1" loc="(520,90)" name="Controlled Buffer">
+    <comp lib="1" loc="(500,90)" name="Controlled Buffer">
       <a name="width" val="3"/>
     </comp>
     <comp lib="2" loc="(240,400)" name="Multiplexer">
       <a name="select" val="4"/>
       <a name="selloc" val="tr"/>
-    </comp>
-    <comp lib="2" loc="(450,150)" name="Multiplexer">
-      <a name="width" val="3"/>
-    </comp>
-    <comp lib="2" loc="(450,210)" name="Multiplexer">
-      <a name="selloc" val="tr"/>
-      <a name="width" val="3"/>
     </comp>
     <comp lib="8" loc="(170,535)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
@@ -366,10 +345,6 @@ end type_architecture;
     <comp lib="8" loc="(490,520)" name="Text">
       <a name="font" val="SansSerif plain 12"/>
       <a name="text" val="Note: instructions that does not save the result will still have the second operand as the destination register, the ALU will copy the second register to the destination register"/>
-    </comp>
-    <comp lib="8" loc="(575,45)" name="Text">
-      <a name="font" val="SansSerif plain 12"/>
-      <a name="text" val="Pull output low on Enable = 0"/>
     </comp>
     <wire from="(160,300)" to="(160,370)"/>
     <wire from="(160,370)" to="(160,380)"/>
@@ -404,43 +379,20 @@ end type_architecture;
     <wire from="(190,460)" to="(200,460)"/>
     <wire from="(190,470)" to="(200,470)"/>
     <wire from="(210,130)" to="(230,130)"/>
-    <wire from="(220,280)" to="(220,320)"/>
-    <wire from="(220,280)" to="(270,280)"/>
-    <wire from="(230,130)" to="(230,170)"/>
-    <wire from="(230,170)" to="(230,250)"/>
+    <wire from="(220,270)" to="(220,320)"/>
+    <wire from="(220,270)" to="(250,270)"/>
+    <wire from="(230,130)" to="(230,220)"/>
+    <wire from="(230,220)" to="(230,260)"/>
     <wire from="(230,80)" to="(230,130)"/>
     <wire from="(240,400)" to="(400,400)"/>
-    <wire from="(250,160)" to="(390,160)"/>
-    <wire from="(250,260)" to="(260,260)"/>
-    <wire from="(250,90)" to="(390,90)"/>
-    <wire from="(260,230)" to="(260,260)"/>
-    <wire from="(260,230)" to="(270,230)"/>
-    <wire from="(260,260)" to="(270,260)"/>
-    <wire from="(270,200)" to="(270,230)"/>
-    <wire from="(270,260)" to="(270,280)"/>
-    <wire from="(270,260)" to="(290,260)"/>
-    <wire from="(290,170)" to="(310,170)"/>
-    <wire from="(290,180)" to="(300,180)"/>
-    <wire from="(290,190)" to="(310,190)"/>
-    <wire from="(290,260)" to="(290,350)"/>
-    <wire from="(290,260)" to="(430,260)"/>
-    <wire from="(310,230)" to="(310,340)"/>
-    <wire from="(310,230)" to="(350,230)"/>
-    <wire from="(310,340)" to="(330,340)"/>
-    <wire from="(310,360)" to="(330,360)"/>
-    <wire from="(340,180)" to="(350,180)"/>
-    <wire from="(350,180)" to="(350,230)"/>
-    <wire from="(350,180)" to="(430,180)"/>
-    <wire from="(360,140)" to="(360,220)"/>
-    <wire from="(360,140)" to="(390,140)"/>
-    <wire from="(360,220)" to="(420,220)"/>
-    <wire from="(360,350)" to="(380,350)"/>
-    <wire from="(390,140)" to="(420,140)"/>
-    <wire from="(390,160)" to="(390,200)"/>
-    <wire from="(390,160)" to="(420,160)"/>
-    <wire from="(390,200)" to="(420,200)"/>
-    <wire from="(390,90)" to="(390,140)"/>
-    <wire from="(390,90)" to="(500,90)"/>
+    <wire from="(250,210)" to="(480,210)"/>
+    <wire from="(250,270)" to="(360,270)"/>
+    <wire from="(250,90)" to="(360,90)"/>
+    <wire from="(360,150)" to="(480,150)"/>
+    <wire from="(360,270)" to="(360,340)"/>
+    <wire from="(360,270)" to="(480,270)"/>
+    <wire from="(360,90)" to="(360,150)"/>
+    <wire from="(360,90)" to="(480,90)"/>
     <wire from="(400,350)" to="(420,350)"/>
     <wire from="(400,360)" to="(400,400)"/>
     <wire from="(400,360)" to="(420,360)"/>
@@ -448,37 +400,31 @@ end type_architecture;
     <wire from="(410,330)" to="(410,340)"/>
     <wire from="(410,330)" to="(420,330)"/>
     <wire from="(410,340)" to="(420,340)"/>
-    <wire from="(430,170)" to="(430,180)"/>
-    <wire from="(430,180)" to="(430,190)"/>
-    <wire from="(430,260)" to="(430,270)"/>
-    <wire from="(430,270)" to="(490,270)"/>
-    <wire from="(440,370)" to="(500,370)"/>
-    <wire from="(450,150)" to="(480,150)"/>
-    <wire from="(450,210)" to="(480,210)"/>
-    <wire from="(470,120)" to="(470,170)"/>
-    <wire from="(470,120)" to="(510,120)"/>
+    <wire from="(440,370)" to="(480,370)"/>
+    <wire from="(470,110)" to="(470,170)"/>
+    <wire from="(470,110)" to="(490,110)"/>
     <wire from="(470,170)" to="(470,230)"/>
     <wire from="(470,170)" to="(490,170)"/>
-    <wire from="(470,230)" to="(470,300)"/>
+    <wire from="(470,230)" to="(470,290)"/>
     <wire from="(470,230)" to="(490,230)"/>
-    <wire from="(470,300)" to="(470,400)"/>
-    <wire from="(470,300)" to="(500,300)"/>
-    <wire from="(470,400)" to="(510,400)"/>
-    <wire from="(470,70)" to="(470,120)"/>
+    <wire from="(470,290)" to="(470,390)"/>
+    <wire from="(470,290)" to="(490,290)"/>
+    <wire from="(470,390)" to="(490,390)"/>
+    <wire from="(470,70)" to="(470,110)"/>
+    <wire from="(490,100)" to="(490,110)"/>
     <wire from="(490,160)" to="(490,170)"/>
     <wire from="(490,220)" to="(490,230)"/>
+    <wire from="(490,280)" to="(490,290)"/>
+    <wire from="(490,380)" to="(490,390)"/>
     <wire from="(500,150)" to="(590,150)"/>
     <wire from="(500,210)" to="(590,210)"/>
-    <wire from="(500,280)" to="(500,300)"/>
-    <wire from="(510,100)" to="(510,120)"/>
-    <wire from="(510,270)" to="(610,270)"/>
-    <wire from="(510,380)" to="(510,400)"/>
-    <wire from="(520,370)" to="(620,370)"/>
-    <wire from="(520,90)" to="(600,90)"/>
+    <wire from="(500,270)" to="(590,270)"/>
+    <wire from="(500,370)" to="(590,370)"/>
+    <wire from="(500,90)" to="(590,90)"/>
     <wire from="(590,150)" to="(630,150)"/>
     <wire from="(590,210)" to="(630,210)"/>
-    <wire from="(600,90)" to="(630,90)"/>
-    <wire from="(610,270)" to="(630,270)"/>
-    <wire from="(620,370)" to="(660,370)"/>
+    <wire from="(590,270)" to="(630,270)"/>
+    <wire from="(590,370)" to="(630,370)"/>
+    <wire from="(590,90)" to="(630,90)"/>
   </circuit>
 </project>
