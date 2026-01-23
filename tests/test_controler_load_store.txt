@@ -1,0 +1,55 @@
+# Test Vector for Load/Store Unit (Projet PARM) - FULL BINARY
+# Based on documentation 6.3.5 and circuit diagram
+# Note: LDR takes 2 cycles. We toggle Clock to test the Flip-Flop logic.
+
+# INPUTS:
+# Instruction[16]: The full instruction machine code
+# Enable[1]: Block activation
+# Stack_Pointer[32]: Current SP value
+# Clk[1]: Clock signal (crucial for LDR sequence)
+# Reset[1]: Global reset
+
+# OUTPUTS:
+# Store[1]: Write enable
+# Load[1]: Read enable
+# PC_Hold[1]: Stall the PC
+# Rmd[3]: Register destination/source index (Bits 8-10)
+# RAM_Addr[32]: Calculated Address (SP + Imm8*4)
+
+Instruction[16] Enable[1] Stack_Pointer[32] Clk[1] Reset[1] Store[1] Load[1] PC_Hold[1] Rmd[3] RAM_Addr[32]
+
+# --- 1. RESET ---
+# Initialize internal Flip-Flop to 0
+0000000000000000 1 00000000000000000000000000000000 0 1 0 0 0 000 00000000000000000000000000000000
+
+# --- 2. STR (Store Register) ---
+# Inst: STR R2, [SP, #4]
+# Opcode: 10010 (STR) | Rt: 010 (R2) | Imm8: 00000001 (Offset 4 / 4 = 1)
+# Binary: 1001001000000001
+# Calc: SP(8) + 1*4 = 12
+# Expect: Store=1, Load=0, PC_Hold=0 (STR is 1 cycle)
+1001001000000001 1 00000000000000000000000000001000 0 0 1 0 0 010 00000000000000000000000000001100
+1001001000000001 1 00000000000000000000000000001000 1 0 1 0 0 010 00000000000000000000000000001100
+
+# --- 3. LDR (Load Register) - CYCLE 1 (WAIT) ---
+# Inst: LDR R5, [SP, #8]
+# Opcode: 10011 (LDR) | Rt: 101 (R5) | Imm8: 00000010 (Offset 8 / 4 = 2)
+# Binary: 1001110100000010
+# Calc: SP(32) + 2*4 = 40
+# Expect: Store=0, Load=0, PC_Hold=1 (We must wait for RAM)
+# Note: Clk is 0, then we pulse to 1 to trigger FF change for next step
+1001110100000010 1 00000000000000000000000000100000 0 0 0 0 1 101 00000000000000000000000000101000
+
+# --- 4. LDR (Load Register) - CYCLE 2 (READ) ---
+# Same instruction, but Clock Rising Edge happened.
+# The internal Flip-Flop is now 1.
+# Expect: Store=0, Load=1 (Read now), PC_Hold=0 (Release PC)
+1001110100000010 1 00000000000000000000000000100000 1 0 0 1 0 101 00000000000000000000000000101000
+
+# --- 5. RESET to clear LDR state ---
+0000000000000000 1 00000000000000000000000000000000 0 1 0 0 0 000 00000000000000000000000000000000
+
+# --- 6. ENABLE TEST ---
+# Disable the block (Enable=0). All outputs should be 0 even with valid instruction.
+# Using STR instruction from Test 2.
+1001001000000001 0 00000000000000000000000000001000 0 0 0 0 0 000 00000000000000000000000000000000

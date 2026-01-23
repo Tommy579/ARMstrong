@@ -1,0 +1,74 @@
+# Test Vector for Data Processing Controller (Projet PARM) - FULL BINARY
+# Based on documentation 6.3.3 and circuit schematic
+# Input Instruction format: 010000 [Opcode 4b] [Rm 3b] [Rdn 3b]
+
+# INPUTS:
+# Instruction[16]: The full 16-bit instruction
+# Enable[1]: Block activation
+
+# OUTPUTS:
+# ALU_Opcode[4]: Extracted from Inst[9:6]
+# Rm[3]: Source Register 2 (Inst[5:3])
+# Rn[3]: Source Register 1 (Inst[2:0])
+# Rd[3]: Destination Register (Inst[2:0])
+# Flags_Update_Mask[4]: Which flags to update (NZCV)
+
+Instruction[16] Enable[1] ALU_Opcode[4] Rm[3] Rn[3] Rd[3] Flags_Update_Mask[4]
+
+# --- 1. LOGICAL OPS (Update N, Z -> Mask 1100) ---
+# ANDS R1, R2
+# Opcode: 0000 (AND)
+# Rm: 010 (R2), Rdn: 001 (R1)
+# Inst: 010000 0000 010 001 -> 0100000000010001
+0100000000010001 1 0000 010 001 001 1100
+
+# EORS R4, R4
+# Opcode: 0001 (EOR)
+# Rm: 100 (R4), Rdn: 100 (R4)
+# Inst: 010000 0001 100 100 -> 0100000001100100
+0100000001100100 1 0001 100 100 100 1100
+
+# --- 2. SHIFT OPS (Update N, Z, C -> Mask 1110) ---
+# LSLS R0, R7 (Logical Shift Left by Register)
+# Opcode: 0010 (LSL)
+# Rm: 111 (R7), Rdn: 000 (R0)
+# Inst: 010000 0010 111 000 -> 0100000010111000
+0100000010111000 1 0010 111 000 000 1110
+
+# RORS R5, R1 (Rotate Right)
+# Opcode: 0111 (ROR)
+# Rm: 001 (R1), Rdn: 101 (R5)
+# Inst: 010000 0111 001 101 -> 0100000111001101
+0100000111001101 1 0111 001 101 101 1110
+
+# --- 3. ARITHMETIC OPS (Update N, Z, C, V -> Mask 1111) ---
+# ADCS R3, R3 (Add with Carry)
+# Opcode: 0101 (ADC)
+# Rm: 011 (R3), Rdn: 011 (R3)
+# Inst: 010000 0101 011 011 -> 0100000101011011
+0100000101011011 1 0101 011 011 011 1111
+
+# CMP R2, R5 (Compare - Result discarded but Rd output matches Rn)
+# Opcode: 1010 (CMP)
+# Rm: 101 (R5), Rn: 010 (R2)
+# Inst: 010000 1010 101 010 -> 0100001010101010
+0100001010101010 1 1010 101 010 010 1111
+
+# RSBS R1, R0 (Reverse Subtract)
+# Opcode: 1001 (RSB)
+# Rm: 000 (R0), Rdn: 001 (R1)
+# Inst: 010000 1001 000 001 -> 0100001001000001
+0100001001000001 1 1001 000 001 001 1111
+
+# --- 4. SPECIAL CASE (MUL) ---
+# MULS R6, R2 (Multiply - often updates only N, Z)
+# Opcode: 1101 (MUL)
+# Rm: 010 (R2), Rdm: 110 (R6)
+# Inst: 010000 1101 010 110 -> 0100001101010110
+# Note: Doc usually specifies N and Z for MUL.
+0100001101010110 1 1101 010 110 110 1100
+
+# --- 5. ENABLE TEST ---
+# Disable block (Enable=0). All outputs should be 0.
+# Using the ADCS instruction from Test 3.
+0100000101011011 0 0000 000 000 000 0000
