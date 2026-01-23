@@ -1,0 +1,50 @@
+# Test Vector for SP Address Block (Projet PARM) - FULL BINARY
+# Documentation 11.1.4.1 (ADD SP) & 11.1.4.2 (SUB SP)
+# Logic: New_SP = SP +/- (Imm7 << 2)
+
+# INPUTS:
+# Instruction[16]: Opcode 10110000...
+# Enable[1]: Block activation
+# Stack_Pointer[32]: Current SP value
+
+# OUTPUTS:
+# Write_Enable[1]: Updates SP register (Active only if Inst[11:8] == 0000)
+# New_Stack_Pointer[32]: Calculated value
+
+Instruction[16] Enable[1] Stack_Pointer[32] Write_Enable[1] New_Stack_Pointer[32]
+
+# --- 1. INITIALIZATION ---
+# Disable block, check outputs are 0 (Pull-down)
+0000000000000000 0 00000000000000000000000000000000 0 00000000000000000000000000000000
+
+# --- 2. ADD SP, #16 (Allocate space) ---
+# Instruction: ADD SP, #16
+# Imm7 = 16 / 4 = 4 -> Binary 0000100
+# Opcode: 1011 0000 0 0000100 -> B004
+# Calculation: 0 + (4 * 4) = 16
+1011000000000100 1 00000000000000000000000000000000 1 00000000000000000000000000010000
+
+# --- 3. SUB SP, #12 (Free space) ---
+# Instruction: SUB SP, #12
+# Imm7 = 12 / 4 = 3 -> Binary 0000011
+# Opcode: 1011 0000 1 0000011 -> B083
+# Calculation: 16 - (3 * 4) = 16 - 12 = 4
+# Input SP is 16 (from previous result logically)
+1011000010000011 1 00000000000000000000000000010000 1 00000000000000000000000000000100
+
+# --- 4. ADD SP, #0 (Identity) ---
+# Instruction: ADD SP, #0
+# Opcode: 1011 0000 0 0000000 -> B000
+# Calculation: 4 + 0 = 4
+1011000000000000 1 00000000000000000000000000000100 1 00000000000000000000000000000100
+
+# --- 5. TEST ENABLE = 0 ---
+# Same valid instruction (ADD SP, #16), but block disabled
+# Expected: Write_Enable=0, Output forced to 0
+1011000000000100 0 00000000000000000000000000000000 0 00000000000000000000000000000000
+
+# --- 6. INVALID INSTRUCTION (Wrong Opcode bits 8-11) ---
+# Instruction: 1011 0001 ... (Bit 8 is 1)
+# The AND gate checking bits 8-11 should block Write_Enable
+# Opcode: B104
+1011000100000100 1 00000000000000000000000000000000 0 00000000000000000000000000000000
